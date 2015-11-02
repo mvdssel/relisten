@@ -1,10 +1,10 @@
 Relisten
 ========
-Downloads the playlists of all radiostations between two certain dates from [](https://relisten.be) and writes them to a CSV-file.
+Downloads the playlists of all radiostations between two certain dates from [https://relisten.be](https://relisten.be) and writes them to a CSV-file.
 
 Installation
 ------------
-1. Install NodeJS. See [](http://nodejs.org) for instructions.
+1. Install NodeJS. See [http://nodejs.org](http://nodejs.org) for instructions.
 1. Install the [Gulp](http://gulpjs.com) build system:
 `
     $ npm install -g gulp
