@@ -1,54 +1,18 @@
 'use strict';
 
 var Serializer = {
-    serialize: function(playlists) {
-        var flattenedPlaylists = flattenPlaylists(playlists);
-        var csv = toCsv(flattenedPlaylists, '"', ';');
-        return csv;
+    /**
+     * Transforms an array of songs into csv-data.
+     * @param {array} playlist An array of songs (~ objects).
+     * @return {string} The CSV equivalent of playlist.
+     */
+    serialize: function(playlist) {
+        return toCsv(playlist, '"', ';');
     }
 };
 
-function flattenPlaylists(playlists) {
-    var flattenedPlaylists = [];
-
-    for(var stationName in playlists) {
-        if(playlists.hasOwnProperty(stationName)) {
-
-            var stationDates = playlists[stationName];
-            for(var date in stationDates) {
-                if(stationDates.hasOwnProperty(date)) {
-
-                    var songs = stationDates[date];
-                    songs.forEach(flattenSong, {
-                        flattenedPlaylists: flattenedPlaylists,
-                        station: stationName,
-                        date: date,
-                    });
-
-                }
-            }
-
-        }
-    }
-
-    return flattenedPlaylists;
-}
-
-function flattenSong(song) {
-    /*jshint validthis:true */
-
-    var flattenedSong = {
-        station: this.station,
-        date: this.date,
-        title: song.title,
-        artist: song.artist,
-        playtime: song.playtime
-    };
-
-    this.flattenedPlaylists.push(flattenedSong);
-}
-
 // Source: https://gist.github.com/JeffJacobson/2770509
+
 /**
  * Converts a value to a string appropriate for entry into a CSV table.  E.g., a string value will be surrounded by quotes.
  * @param {string|number|object} theValue

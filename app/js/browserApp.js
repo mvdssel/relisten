@@ -1,11 +1,13 @@
 'use strict';
 
 var $ = require('jquery');
-var picker = require('../../node_modules/pickadate/lib/compressed/picker.js');
-var pickerdate = require('../../node_modules/pickadate/lib/compressed/picker.date.js');
 var PlaylistFactory = require('./PlaylistFactory');
 var Serializer = require('./Serializer');
+// Require for picker libs is needed in order to include them in the packaged version of the app
+var picker = require('../../node_modules/pickadate/lib/compressed/picker.js');
+var pickerdate = require('../../node_modules/pickadate/lib/compressed/picker.date.js');
 
+// Start when page is fully loaded
 $(document).ready(function() {
 
 /**
@@ -35,7 +37,6 @@ button.click(function() {
        !isNaN(startDate.getTime()) && !isNaN(endDate.getTime()) &&
        startDate <= endDate
     ) {
-        console.log('Valid dates selected...');
         PlaylistFactory.getPlaylists(startDate, endDate, handlePlaylists);
         $(document.body).append($('<p>').text("Downloading playlists, this may take a while..."));
     }
@@ -46,7 +47,10 @@ button.click(function() {
 });
 
 /**
- * Finalize method
+ * Method to be called when all playlists are fetched. Serializes
+ * the playlists to CSV data and downloads the data in the browser.
+ * @param {Error} error Possible error, null if none occurred.
+ * @param {Array} playlists Array of songs.
  */
 function handlePlaylists(error, playlists) {
     if(error) {

@@ -4,9 +4,19 @@ Downloads the playlists of all radiostations between two certain dates from [htt
 
 Installation
 ------------
-
+1. Install NodeJS. See [http://nodejs.org]() for instructions.
+1. Install the [http://gulpjs.com](Gulp) build system:
+`
+    $ npm install -g gulp
+`
+1. Install the NodeJS dependencies:
+`
     $ npm install
+`
+1. Build the project
+`
     $ gulp install
+`
 
 Usage
 -----
@@ -16,10 +26,14 @@ Browser version:
 
 NodeJS version:
 
-    $ node app/js/nodeApp.js
+    $ npm start
 
 Information
 -----------
-The browser version is packaged using Browserify. Here you can choose the dates easily.
+### Browser version
+The browser version is packaged using [http://browserify.org](Browserify). Here the dates can be chosen using a simple date picker.
 
-In the NodeJS version, the dates are hard-coded. See `app/js/nodeApp.js` for more information.
+This version however has some XSS issues.
+
+### NodeJS version
+In the NodeJS version, the start and end dates are hard-coded. See `app/js/nodeApp.js` for information and customization.

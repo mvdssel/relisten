@@ -1,13 +1,17 @@
 'use strict';
 
 var DateFactory = {
+    /**
+     * Generates all dates between two provided dates
+     * and returns them as an array (arguments included).
+     */
     getDates: function(from, to) {
         var dates = [new Date(from)],
-            current = new Date(from);
+            d = new Date(from);
         
-        while(current < to) {
-            current.setDate(current.getDate() + 1);
-            dates.push(new Date(current));
+        while(d < to) {
+            d.setDate(d.getDate() + 1);
+            dates.push(new Date(d));
         }
 
         return dates;
