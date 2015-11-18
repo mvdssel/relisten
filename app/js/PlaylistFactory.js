@@ -3,8 +3,7 @@
 var async = require('async'),
     util = require('util'),
     StationFactory = require('./StationFactory'),
-    SongFactory = require('./SongFactory'),
-    DateFactory = require('./DateFactory');
+    SongFactory = require('./SongFactory');
 
 var PlaylistFactory = {
     /**
@@ -17,7 +16,7 @@ var PlaylistFactory = {
     getPlaylists: function(startDate, endDate, callback) {
         var playlists = [];
 
-        var dates = DateFactory.getDates(startDate, endDate);
+        var dates = generateDatesBetween(startDate, endDate);
 
         /**
          * Runs an array of functions in series, each passing their results
@@ -68,6 +67,24 @@ var PlaylistFactory = {
  */
 function formatDate(date) {
     return util.format('%s-%s-%s', date.getDate(), 1 + date.getMonth(), date.getFullYear());
+}
+
+/**
+ * Generates all dates between two provided dates
+ * and returns them as an array (arguments included).
+ * @param {Date} from
+ * @param {Date} to
+ */
+function generateDatesBetween(from, to) {
+    var dates = [new Date(from)],
+    d = new Date(from);
+    
+    while(d < to) {
+        d.setDate(d.getDate() + 1);
+        dates.push(new Date(d));
+    }
+
+    return dates;
 }
 
 module.exports = PlaylistFactory;
